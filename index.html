@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$SHIBAG — Hold Your Bags</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- ─── HEADER ──────────────────────────────────────── -->
+    <header class="lv-header">
+      <div class="lv-header__inner">
+        <div class="lv-header__side">
+          <button class="icon-btn" aria-label="Menu">
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+              <rect y="0" width="20" height="1.5" fill="currentColor"/>
+              <rect y="6" width="20" height="1.5" fill="currentColor"/>
+              <rect y="12" width="20" height="1.5" fill="currentColor"/>
+            </svg>
+            <span>Menu</span>
+          </button>
+          <button class="icon-btn" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Search</span>
+          </button>
+        </div>
+
+        <a class="lv-logo" href="#">$SHIBAG</a>
+
+        <div class="lv-header__side lv-header__side--right">
+          <a class="icon-btn" href="https://x.com/i/communities/2032157746808721885" target="_blank" rel="noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.2-8.3L1 2h6.3l4.4 5.8L18.9 2z"/>
+            </svg>
+            <span>Community</span>
+          </a>
+          <button class="icon-btn" aria-label="Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── PRODUCT LAYOUT ──────────────────────────────── -->
+    <main class="lv-product">
+
+      <!-- LEFT: sticky gallery -->
+      <div class="lv-gallery">
+        <div class="lv-gallery__thumbs" id="thumbs">
+          <button class="thumb active" onclick="setMain('./char-street.png',this)">
+            <img src="./char-street.png" alt="Street" />
+          </button>
+          <button class="thumb" onclick="setMain('./char-plush2.png',this)">
+            <img src="./char-plush2.png" alt="Plush closeup" />
+          </button>
+        </div>
+        <div class="lv-gallery__main">
+          <img id="mainImage" src="./char-street.png" alt="$SHIBAG — Hold Your Bags" />
+        </div>
+      </div>
+
+      <!-- RIGHT: product info -->
+      <div class="lv-info">
+        <div class="lv-info__inner">
+          <p class="lv-sku">M29325</p>
+          <p class="lv-preorder">PRE-ORDER</p>
+          <h1 class="lv-title">$SHIBAG</h1>
+          <p class="lv-tagline">Hold Your Bags</p>
+          <p class="lv-price">$8,850.00</p>
+
+          <button class="lv-btn-cart">Place in Cart</button>
+
+          <a href="#links" class="lv-underlink">Socials</a>
+          <p class="lv-delivery">Complimentary Standard Delivery or Collect-in-Store.</p>
+
+          <p class="lv-desc">
+            The playful Shiba Carry is defined by a rich interplay of plush shearling
+            and Monogram canvas, which extends to both the top handles and the removable,
+            adjustable strap. These materials lend the adorable design an ultra-comfortable
+            feel when carried. Beyond its whimsical aesthetic, the bag features a
+            surprisingly generous interior, offering ample space for daily essentials.
+          </p>
+
+          <div class="lv-accordion">
+            <details open>
+              <summary>Description</summary>
+              <div class="lv-accordion__body">
+                <ul>
+                  <li>Plush shearling body in the shape of a Shiba dog</li>
+                  <li>Monogram canvas top handles and removable adjustable strap</li>
+                  <li>Zip closure</li>
+                  <li>Microfiber lining</li>
+                  <li>Width 24 cm · Height 16 cm · Depth 10 cm</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Delivery &amp; Returns</summary>
+              <div class="lv-accordion__body">
+                <p>Complimentary standard delivery on all orders. Returns accepted within 30 days in original condition.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Roadmap</summary>
+              <div class="lv-accordion__body">
+                <p>Phase 01 — Community drop and timeline activation.<br/>
+                Phase 02 — Character board expansion and meme raids.<br/>
+                Phase 03 — Contract reveal and ecosystem growth.</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- CONTRACT BOX -->
+          <div class="lv-ca">
+            <span class="lv-ca__label">Contract Address</span>
+            <code id="contractText">2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump</code>
+            <button class="lv-ca__btn" id="copyCaBtn">Copy</button>
+          </div>
+
+          <!-- SOCIAL LINKS IN SIDE PANEL -->
+          <div class="lv-social-row">
+            <a class="lv-social-pill" href="https://x.com/i/communities/2032157746808721885" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.2-8.3L1 2h6.3l4.4 5.8L18.9 2z"/></svg>
+              X Community
+            </a>
+            <a class="lv-social-pill" href="https://pump.fun/coin/2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M4 19V5h8.3c3.4 0 5.7 1.9 5.7 4.8 0 2.9-2.3 4.8-5.7 4.8H8.2V19H4zm4.2-7.8h3.8c1.2 0 2-.6 2-1.6s-.8-1.6-2-1.6H8.2v3.2z"/></svg>
+              Pump.fun
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ─── TICKER STRIP ─────────────────────────────────── -->
+    <div class="lv-ticker" aria-hidden="true">
+      <div class="lv-ticker__track">
+        <span>$SHIBAG</span><span>◆</span>
+        <span>Hold Your Bags</span><span>◆</span>
+        <span>Solana</span><span>◆</span>
+        <span>2TAro…pump</span><span>◆</span>
+        <span>0 / 0 Tax</span><span>◆</span>
+        <span>$SHIBAG</span><span>◆</span>
+        <span>Hold Your Bags</span><span>◆</span>
+        <span>Solana</span><span>◆</span>
+        <span>2TAro…pump</span><span>◆</span>
+        <span>0 / 0 Tax</span><span>◆</span>
+      </div>
+    </div>
+
+    <!-- ─── SOCIAL PROOF ──────────────────────────────────── -->
+    <section class="lv-section" id="post">
+      <div class="lv-section__head">
+        <p class="lv-kicker">The Post That Started It</p>
+        <h2>They said don't hold your bags.<br/>They didn't see this one.</h2>
+      </div>
+      <div class="lv-proof">
+
+        <!-- Tweet embed -->
+        <div class="lv-proof__tweet">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" align="center">
+            <p lang="ja" dir="ltr">ルイヴィトンで一番ほしいバッグ <a href="https://t.co/lX4qjma65j">pic.twitter.com/lX4qjma65j</a></p>
+            &mdash; 白 (@012_shiro) <a href="https://twitter.com/012_shiro/status/2047098435325833319?ref_src=twsrc%5Etfw">April 22, 2026</a>
+          </blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+        <!-- Our post -->
+        <div class="lv-proof__tweet">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" align="center"><p lang="en" dir="ltr">they said don&#39;t hold your bags<br>they didn&#39;t see this one<br>$8.5k at <a href="https://twitter.com/LouisVuitton?ref_src=twsrc%5Etfw">@LouisVuitton</a><br>free on your timeline<a href="https://twitter.com/search?q=%24SHIBAG&amp;src=ctag&amp;ref_src=twsrc%5Etfw">$SHIBAG</a> - Hold Your Bags <a href="https://t.co/HC1jYrnv4Y">https://t.co/HC1jYrnv4Y</a> <a href="https://t.co/vfsuV8xFMS">pic.twitter.com/vfsuV8xFMS</a></p>&mdash; gremos (@0_o_gremos_o_0) <a href="https://twitter.com/0_o_gremos_o_0/status/2047273911067214112?ref_src=twsrc%5Etfw">April 23, 2026</a></blockquote>
+        </div>
+
+        <div class="lv-proof__text">
+          <p>
+            A $8,850 bag shaped like a Shiba. The tweet went viral before anyone could
+            explain it. That's the whole thesis.
+          </p>
+          <p>
+            One post, one slogan — <strong>$SHIBAG · Hold Your Bags</strong> —
+            and the entire timeline picked it up. Luxury aesthetic meets
+            crypto irony. Now it's a coin, a community and a character board.
+          </p>
+          <a class="lv-btn-outline" href="https://x.com/i/communities/2032157746808721885" target="_blank" rel="noreferrer">Open Community Thread</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── CHARACTER BOARD ───────────────────────────────── -->
+    <section class="lv-section" id="collection">
+      <div class="lv-section__head">
+        <p class="lv-kicker">Character Board</p>
+        <h2>Different Personas. Same Bag.</h2>
+      </div>
+      <div class="lv-characters lv-characters--3">
+        <figure class="lv-char">
+          <img src="./char-anime.png" alt="Anime character" />
+          <figcaption>Street Carry</figcaption>
+        </figure>
+        <figure class="lv-char">
+          <img src="./char-penguin2.png" alt="Penguin character" />
+          <figcaption>Pudgy Carry</figcaption>
+        </figure>
+        <figure class="lv-char">
+          <img src="./char-wizard2.png" alt="Wizard character" />
+          <figcaption>Wizard Carry</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ─── DROP INFO ─────────────────────────────────────── -->
+    <section class="lv-section lv-section--light" id="info">
+      <div class="lv-section__head">
+        <p class="lv-kicker">Drop Info</p>
+        <h2>Collection Details</h2>
+      </div>
+      <div class="lv-stats">
+        <div class="lv-stat">
+          <p class="lv-stat__label">Ticker</p>
+          <p class="lv-stat__val">$SHIBAG</p>
+        </div>
+        <div class="lv-stat">
+          <p class="lv-stat__label">Network</p>
+          <p class="lv-stat__val">Solana</p>
+        </div>
+        <div class="lv-stat">
+          <p class="lv-stat__label">Tax</p>
+          <p class="lv-stat__val">0 / 0</p>
+        </div>
+        <div class="lv-stat">
+          <p class="lv-stat__label">Contract</p>
+          <p class="lv-stat__val lv-stat__val--ca">2TAro…pump</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── LINKS ─────────────────────────────────────────── -->
+    <section class="lv-section" id="links">
+      <div class="lv-section__head">
+        <p class="lv-kicker">Community</p>
+        <h2>Join the Timeline</h2>
+      </div>
+      <div class="lv-links">
+        <a class="lv-link-card" href="https://x.com/i/communities/2032157746808721885" target="_blank" rel="noreferrer">
+          <div class="lv-link-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.2-8.3L1 2h6.3l4.4 5.8L18.9 2z"/></svg>
+          </div>
+          <div>
+            <p class="lv-link-card__name">X Community</p>
+            <p class="lv-link-card__sub">Join the official community thread</p>
+          </div>
+          <svg class="lv-link-card__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a class="lv-link-card" href="https://pump.fun/coin/2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump" target="_blank" rel="noreferrer">
+          <div class="lv-link-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M4 19V5h8.3c3.4 0 5.7 1.9 5.7 4.8 0 2.9-2.3 4.8-5.7 4.8H8.2V19H4zm4.2-7.8h3.8c1.2 0 2-.6 2-1.6s-.8-1.6-2-1.6H8.2v3.2z"/></svg>
+          </div>
+          <div>
+            <p class="lv-link-card__name">Pump.fun</p>
+            <p class="lv-link-card__sub">Buy $SHIBAG on launch</p>
+          </div>
+          <svg class="lv-link-card__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a class="lv-link-card lv-link-card--soon" href="#" aria-disabled="true">
+          <div class="lv-link-card__icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="lv-link-card__name">Dexscreener</p>
+            <p class="lv-link-card__sub">Chart available after launch</p>
+          </div>
+          <span class="lv-badge">Soon</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────── -->
+    <section class="lv-section lv-section--light">
+      <div class="lv-section__head">
+        <p class="lv-kicker">FAQ</p>
+        <h2>Quick Answers</h2>
+      </div>
+      <div class="lv-faq">
+        <details open>
+          <summary>Is this an official Louis Vuitton store?</summary>
+          <p>No. This is a fan-made meme concept page styled as an official luxury product drop.</p>
+        </details>
+        <details>
+          <summary>When will the contract address be live?</summary>
+          <p>Contract is live: <strong>2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump</strong>. Always verify on this page only.</p>
+        </details>
+        <details>
+          <summary>What is the core message of $SHIBAG?</summary>
+          <p>One bag. Every persona. A recognizable visual identity that people want to post, collect and rally around.</p>
+        </details>
+        <details>
+          <summary>What network is $SHIBAG on?</summary>
+          <p>Solana. Buy on <a href="https://pump.fun/coin/2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump" target="_blank" rel="noreferrer" style="text-decoration:underline">Pump.fun</a>. Always verify the CA on this page only.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─────────────────────────────────────────── -->
+    <footer class="lv-footer">
+      <p class="lv-footer__brand">$SHIBAG</p>
+      <p class="lv-footer__tagline">Hold Your Bags · Solana · 2TAroWRBXDXe4BHHzzUyEohbjWc5xbfbvFmrJWtcpump</p>
+      <p class="lv-footer__disclaimer">
+        Fan-made meme concept. Not affiliated with Louis Vuitton Malletier.
+        $SHIBAG is a community meme coin with no intrinsic value and no
+        expectation of financial return. Always do your own research.
+      </p>
+    </footer>
+
+    <script>
+      // Gallery switcher
+      function setMain(src, btn) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+      }
+
+      // Copy CA
+      const copyBtn = document.getElementById('copyCaBtn');
+      const caText  = document.getElementById('contractText');
+      if (copyBtn && caText) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(caText.textContent.trim());
+            copyBtn.textContent = 'Copied';
+          } catch {
+            copyBtn.textContent = 'Failed';
+          }
+          setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1600);
+        });
+      }
+    </script>
+  </body>
+</html>
