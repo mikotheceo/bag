@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$UNBROKEN — abandoned, but unbroken.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0d;
+      --surface: #141416;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --border: #fafafa;
+      --accent: #e8b923;
+      --accent-dim: #b8890f;
+      --radius-pill: 9999px;
+      --border-thick: 3px;
+      --font-sans: "DM Sans", system-ui, sans-serif;
+      --font-display: "Bebas Neue", impact, sans-serif;
+      --max: 72rem;
+      --header-h: 3.75rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(100% - clamp(1rem, 4vw, 2.5rem), var(--max));
+      margin-inline: auto;
+    }
+
+    /* —— Header —— */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: var(--border-thick) solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: var(--header-h);
+      padding-block: 0.65rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+      letter-spacing: 0.04em;
+      color: var(--text);
+      border: var(--border-thick) solid var(--border);
+      padding: 0.2rem 0.65rem;
+      line-height: 1;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-desktop {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav-desktop a:not(.btn-pill) {
+      padding: 0.45rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: var(--radius-pill);
+      border: var(--border-thick) solid transparent;
+    }
+
+    .nav-desktop a:not(.btn-pill):hover {
+      border-color: var(--border);
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-pill);
+      border: var(--border-thick) solid var(--border);
+      background: var(--accent);
+      color: #111;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-pill:hover {
+      background: #f0c94a;
+      transform: translateY(-1px);
+    }
+
+    .btn-pill--ghost {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-pill--ghost:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: var(--border-thick) solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: var(--border-thick);
+      margin-inline: 0.55rem;
+      background: var(--text);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    body.nav-open .menu-toggle span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    body.nav-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.nav-open .menu-toggle span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 1rem 0 1.25rem;
+      border-top: var(--border-thick) solid var(--border);
+    }
+
+    body.nav-open .nav-mobile {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 0.75rem;
+      border: var(--border-thick) solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+    }
+
+    .nav-mobile .btn-pill {
+      margin-top: 0.35rem;
+      text-align: center;
+    }
+
+    @media (min-width: 960px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-desktop {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: none !important;
+      }
+    }
+
+    /* —— Sections —— */
+    section {
+      padding-block: clamp(3rem, 8vw, 5.5rem);
+      border-bottom: var(--border-thick) solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Hero */
+    #home {
+      padding-block: clamp(2.25rem, 6vw, 4rem) clamp(3rem, 8vw, 5rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: clamp(1.75rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1.05fr;
+      }
+    }
+
+    .ticker {
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 12vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+
+    .ticker .accent {
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin: 1rem 0 0;
+      max-width: 28ch;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .hero-media {
+      border: var(--border-thick) solid var(--border);
+      border-radius: 0;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .hero-media img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .contract-strip {
+      margin-top: 1.25rem;
+      padding: 0.65rem 0.85rem;
+      border: var(--border-thick) solid var(--border);
+      background: var(--surface);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .contract-strip code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+      color: var(--text);
+      word-break: break-all;
+      flex: 1 1 12rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      gap: clamp(1.5rem, 4vw, 2.5rem);
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.04em;
+      margin: 0 0 1rem;
+    }
+
+    .about-text p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .about-text p strong {
+      color: var(--text);
+    }
+
+    .about-img {
+      border: var(--border-thick) solid var(--border);
+      overflow: hidden;
+    }
+
+    .about-img img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* How to buy */
+    .steps {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .steps {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .step {
+      border: var(--border-thick) solid var(--border);
+      padding: 1.15rem;
+      background: var(--surface);
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .step-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: var(--border-thick) solid var(--accent);
+      border-radius: var(--radius-pill);
+      display: grid;
+      place-items: center;
+    }
+
+    .step-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .step h3 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Tokenomics */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+
+    .pill {
+      border: var(--border-thick) solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0.55rem 1rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--surface);
+    }
+
+    .pill em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .features {
+      display: grid;
+      gap: 0;
+    }
+
+    .feature-row {
+      display: grid;
+      gap: 0.5rem;
+      padding: 1.15rem 0;
+      border-top: var(--border-thick) solid var(--border);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 700px) {
+      .feature-row {
+        grid-template-columns: 10rem 1fr;
+        align-items: start;
+        gap: 1.5rem;
+      }
+    }
+
+    .feature-row:last-child {
+      border-bottom: var(--border-thick) solid var(--border);
+    }
+
+    .feature-row h3 {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+    }
+
+    .feature-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Roadmap */
+    .phases {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .phases {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .phases {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .phase {
+      border: var(--border-thick) solid var(--border);
+      padding: 1.15rem;
+      background: var(--surface);
+      min-height: 100%;
+    }
+
+    .phase .phase-n {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .phase h3 {
+      margin: 0.35rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .phase ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .phase li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* Social */
+    .social-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 600px) {
+      .social-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .social-card {
+      border: var(--border-thick) solid var(--border);
+      padding: 1.15rem;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .social-card a.btn-pill {
+      align-self: flex-start;
+    }
+
+    .ca-box {
+      border: var(--border-thick) solid var(--border);
+      padding: 1rem;
+      background: var(--bg);
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .ca-box code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+      color: var(--text);
+    }
+
+    .ca-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.6rem 1.2rem;
+      border: var(--border-thick) solid var(--border);
+      border-radius: var(--radius-pill);
+      z-index: 100;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      padding-block: 2rem 2.5rem;
+      border-top: var(--border-thick) solid var(--border);
+    }
+
+    footer p {
+      margin: 0 0 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    footer .copy {
+      margin: 1rem 0 0;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#home">$<span>UNBROKEN</span></a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#how-to-buy">How to buy</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a class="btn-pill" href="#how-to-buy">Buy</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="wrap nav-mobile" id="mobile-nav" aria-hidden="true">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#how-to-buy">How to buy</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="btn-pill" href="#how-to-buy">Buy</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <h1 class="ticker">$<span class="accent">UNBROKEN</span></h1>
+          <p class="tagline">Abandoned, but unbroken. Built myself. Strength born, not borrowed.</p>
+          <div class="hero-ctas">
+            <a class="btn-pill" href="#how-to-buy">Buy now</a>
+            <a class="btn-pill btn-pill--ghost" href="https://dexscreener.com" target="_blank" rel="noopener noreferrer">Chart</a>
+          </div>
+          <div class="contract-strip" aria-label="Contract">
+            <span>CA</span>
+            <code id="contract-hero">REPLACE_WITH_SOLANA_CA</code>
+            <button class="btn-pill" type="button" data-copy="#contract-hero" style="padding: 0.35rem 0.75rem; font-size: 0.65rem;">Copy</button>
+          </div>
+        </div>
+        <div class="hero-media reveal">
+          <img src="assets/hero-wide.png" alt="$UNBROKEN hero art: lone figure at dawn over mountains" width="1600" height="900" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about-grid">
+        <div class="reveal about-text">
+          <h2 class="section-label">About</h2>
+          <p><strong>They left when it mattered.</strong> No rescue fantasy. No waiting for permission.</p>
+          <p>$UNBROKEN is the ticker for everyone who rebuilt alone: quiet work, loud proof. Not weakness. How strength starts.</p>
+          <p>Community-owned meme. No team promises. DYOR. If the story fits your scar tissue, you already know why you are here.</p>
+        </div>
+        <div class="about-img reveal">
+          <img src="assets/about-figure.png" alt="$UNBROKEN character overlooking the range" width="1200" height="1500" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to-buy">
+      <div class="wrap">
+        <h2 class="section-label reveal">How to buy</h2>
+        <div class="steps">
+          <article class="step reveal">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3v18M5 12h14M8 8l4-4 4 4M8 16l4 4 4-4"/></svg>
+            </div>
+            <h3>Wallet</h3>
+            <p>Install Phantom or your Solana wallet. Back up your seed offline. Never paste it anywhere on this site.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+            </div>
+            <h3>SOL</h3>
+            <p>Fund with SOL for swap fees. Keep a little extra for network variance.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>Swap</h3>
+            <p>Open Jupiter or Raydium. Paste the contract address. Set slippage. Confirm in wallet.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l4 4 4-8 4 4"/></svg>
+            </div>
+            <h3>HODL</h3>
+            <p>You are early noise in a long story. Risk is real. Size like you can afford zero.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tokenomics">
+      <div class="wrap">
+        <h2 class="section-label reveal">Tokenomics</h2>
+        <div class="pills reveal">
+          <span class="pill"><em>1B</em> supply</span>
+          <span class="pill"><em>0%</em> team alloc</span>
+          <span class="pill"><em>LP</em> burned / locked</span>
+          <span class="pill"><em>0%</em> tax</span>
+        </div>
+        <div class="features">
+          <div class="feature-row reveal">
+            <h3>Fair launch</h3>
+            <p>No insider rounds. Same pool for everyone who shows up. Verify mint authority renounced on-chain before you ape.</p>
+          </div>
+          <div class="feature-row reveal">
+            <h3>Liquidity first</h3>
+            <p>Depth beats hype. Check the pair, lock status, and how long LP has been untouched.</p>
+          </div>
+          <div class="feature-row reveal">
+            <h3>Meme, not roadmap coin</h3>
+            <p>Narrative is the product. Price is sentiment plus liquidity math. Treat charts as entertainment with consequences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="wrap">
+        <h2 class="section-label reveal">Roadmap</h2>
+        <div class="phases">
+          <article class="phase reveal">
+            <div class="phase-n">Phase 01</div>
+            <h3>Genesis</h3>
+            <ul>
+              <li>Deploy + lock LP</li>
+              <li>Socials live</li>
+              <li>First lore drops</li>
+            </ul>
+          </article>
+          <article class="phase reveal">
+            <div class="phase-n">Phase 02</div>
+            <h3>Signal</h3>
+            <ul>
+              <li>Community raids</li>
+              <li>Meme templates</li>
+              <li>Listings outreach</li>
+            </ul>
+          </article>
+          <article class="phase reveal">
+            <div class="phase-n">Phase 03</div>
+            <h3>Depth</h3>
+            <ul>
+              <li>CEX / trackers</li>
+              <li>Partnerships (if any)</li>
+              <li>Holder tools TBD</li>
+            </ul>
+          </article>
+          <article class="phase reveal">
+            <div class="phase-n">Phase 04</div>
+            <h3>Prove it</h3>
+            <ul>
+              <li>Long-scroll culture</li>
+              <li>Survivor stories</li>
+              <li>Whatever the trenches need</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="social">
+      <div class="wrap social-grid">
+        <div class="social-card reveal">
+          <h2 class="section-label" style="margin-bottom: 0;">Social</h2>
+          <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">Community on X: <strong style="color: var(--text);">@unbroken_sol</strong>. Telegram and chart: add real links when live.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <a class="btn-pill btn-pill--ghost" href="https://x.com/unbroken_sol" target="_blank" rel="noopener noreferrer">X</a>
+            <a class="btn-pill btn-pill--ghost" href="https://t.me" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a class="btn-pill" href="https://dexscreener.com" target="_blank" rel="noopener noreferrer">Chart</a>
+          </div>
+        </div>
+        <div class="ca-box reveal">
+          <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);">Contract</span>
+          <code id="contract-social">REPLACE_WITH_SOLANA_CA</code>
+          <div class="ca-actions">
+            <button class="btn-pill" type="button" data-copy="#contract-social">Copy CA</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>Disclaimer:</strong> $UNBROKEN is a meme coin with no intrinsic value or expectation of financial return. This is not financial advice. Cryptocurrencies are volatile; you may lose your entire stake. You are responsible for your own trades and taxes.</p>
+      <p class="copy">© <span id="y"></span> $UNBROKEN community. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status">Copied</div>
+
+  <script>
+    (function () {
+      var body = document.body;
+      var toggle = document.querySelector(".menu-toggle");
+      var mobile = document.getElementById("mobile-nav");
+      var toast = document.getElementById("toast");
+      var toastTimer;
+
+      function setNav(open) {
+        body.classList.toggle("nav-open", open);
+        if (toggle) toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        if (mobile) mobile.setAttribute("aria-hidden", open ? "false" : "true");
+      }
+
+      if (toggle && mobile) {
+        toggle.addEventListener("click", function () {
+          setNav(!body.classList.contains("nav-open"));
+        });
+        mobile.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            setNav(false);
+          });
+        });
+      }
+
+      document.querySelectorAll('[data-copy]').forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var sel = btn.getAttribute("data-copy");
+          var el = document.querySelector(sel);
+          if (!el) return;
+          var text = el.textContent.trim();
+          navigator.clipboard.writeText(text).then(function () {
+            if (toast) {
+              toast.classList.add("show");
+              clearTimeout(toastTimer);
+              toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+              }, 1800);
+            }
+          });
+        });
+      });
+
+      var revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+        revealEls.forEach(function (el) {
+          obs.observe(el);
+        });
+      } else {
+        revealEls.forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+
+      var y = document.getElementById("y");
+      if (y) y.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
